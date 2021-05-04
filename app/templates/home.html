@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Experiment Tracker</title>
+        <link rel="stylesheet" href="/static/style.css">
+    </head>
+    <body>
+        {% for info in geninfo %}
+            <h1> {{ info.professor }} </h1>
+            <p> {{ info.Experiment_Title }} </p>
+        {% endfor %}
+    </body>
+</html>
