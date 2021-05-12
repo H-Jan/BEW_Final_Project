@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html>
+
+    {% extends "base.html" %}
+    {% block content %} 
     <head>
         <title>Experiment Tracker</title>
         <link rel="stylesheet" href="/static/style.css">
@@ -10,4 +13,6 @@
             <p> {{ info.Experiment_Title }} </p>
         {% endfor %}
     </body>
+
+    {% endblock content %} 
 </html>

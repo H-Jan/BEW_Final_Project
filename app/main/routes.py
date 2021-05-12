@@ -4,7 +4,14 @@ from datetime import date, datetime
 from flask_login import login_user, logout_user, login_required, current_user
 from app import app, db
 
+
+#app = Flask(__name__)
+
+#app.config['SECRET KEY'] = '1122334455667788'
+
 main = Blueprint('main', __name__)
+
+from .forms import RegistrationForm, LoginForm
 
 # Create your routes here.
 '''Login Page - Displays the login requirements
@@ -44,6 +51,27 @@ def general():
 @app.route("/home")
 def home():
     return render_template('home.html')
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data}!', 'success')
+        return redirect(url_for('home'))
+    return render_template('register.html', title='Register', form=form)
+    #The form=form is going back to form=RegistrationForm()
+
+@app.route("/login", methods=['GET', 'POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+            flash('You have been logged in!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Login is unsuccessful. Please check in username and password', 'danger')
+    return render_template('login.html', title='Login', form=form)
+
 
 @app.route("/about")
 def about():
