@@ -1,1 +1,46 @@
 /* Add styles here. */
+
+/*-- Body Reset --*/
+body {
+    overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+    color: #616971;
+  }
+  
+  /*============= TOP BAR HEADER =============*/
+  
+  .top-bar {
+    background: #E3FFFC;
+    height: 2.8rem;
+    padding: .5rem 0;
+  }
+  
+  .top-bar a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  /*============= NAVIGATION =============*/
+  
+  
+  
+  .navbar {
+    font-size: 1.15rem;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+    z-index: 1;
+  }
+  
+  .nav-item {
+    padding: 0.5rem;
+  }
+  
+  .nav-link {
+    color: #004501!important;
+  }
+  
+  .nav-link.active,
+  .nav-link:hover {
+    color:#4ABDFF!important;
+  }

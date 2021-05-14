@@ -2,7 +2,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SelectField, SubmitField, PasswordField, FloatField, BooleanField
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
-from wtforms.validators import DataRequired, Length, URL, ValidationError, Email, EqualTo
+from wtforms.validators import DataRequired, Length, URL, ValidationError, Email, EqualTo, ValidationError
+from app.models import User, PostExperiment, PlantModel
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -14,6 +15,19 @@ class RegistrationForm(FlaskForm):
     profession = StringField('Profession', validators=[DataRequired(), Length(min=1, max=30)])
     #Run Test for equals between password and confirm password
     submit = SubmitField('Sign Up')
+
+    def validate_username(self, username):
+        user = User.query.filter_by(username = username.data).first()
+        if user:
+            raise ValidationError('Unfortunately this username is already taken, please choose another one')
+    
+    #For unique fields
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email = email.data).first()
+        if user:
+            raise ValidationError('Unfortunately this email is already taken, please choose another one')
+
 
 class LoginForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)])
@@ -29,6 +43,7 @@ class ExperimentForm(FlaskForm):
     title = StringField('Experiment', validators=[DataRequired(), Length(min=1, max=30)])
     hypothesis = StringField('Hypothesis', validators=[DataRequired(), Length(min=1, max=300)])
     progress = StringField('Progress', validators=[DataRequired()])
+    result = StringField('Result', validators=[DataRequired()])
     exp_photo = StringField('Experiment Photo', validators=[URL()])
     submit = SubmitField('Save')
 

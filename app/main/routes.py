@@ -3,15 +3,13 @@ from flask import Flask, request, render_template, redirect, url_for, flash
 from datetime import date, datetime
 from flask_login import login_user, logout_user, login_required, current_user
 from app import app, db
-
-
-#app = Flask(__name__)
-
-#app.config['SECRET KEY'] = '1122334455667788'
+from flask_bcrypt import Bcrypt
 
 main = Blueprint('main', __name__)
 
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, ExperimentForm, PlantForm
+from app.models import User, PostExperiment
+bcrypt = Bcrypt(app)
 
 # Create your routes here.
 '''Login Page - Displays the login requirements
@@ -29,24 +27,9 @@ Past Plant's Used - Display's all previous plants used for experimentation
 Plant Details - Display's the details of a particular plant 
 '''
 
-geninfo = [
-    {
-        'professor' : 'Hani Jandali',
-        'Experiment_Title' : 'Cassava Plants Immunity',
-        'hypothesis' : 'Cassava is inherently immune',
-        'Progress': '50%'
-    },
-    {
-        'professor' : 'Miranda L',
-        'Experiment_Title' : 'Healthy Lettuce ',
-        'hypothesis' : 'Its Yummu',
-        'Progress': '30%'
-    },
-]
-
 @app.route("/")
 def general():
-    return render_template('home.html', geninfo = geninfo)
+    return render_template('home.html', methods=['GET', 'POST'])
 
 @app.route("/home")
 def home():
@@ -56,8 +39,12 @@ def home():
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
-        flash(f'Account created for {form.username.data}!', 'success')
-        return redirect(url_for('home'))
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(user)
+        db.session.commit()
+        flash(f'Your account has been created, you can now log in', 'success')
+        return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
     #The form=form is going back to form=RegistrationForm()
 

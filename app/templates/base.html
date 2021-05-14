@@ -1,10 +1,89 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
     <head>
         <title>Project Title</title>
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <body>
+        Add base html here. 
+        Below is for flashing messages
+        {% with messages = get_flashed_messages(with_categories=true) %}
+
+            {% if messages %}
+             If messages was not empty
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">
+                        {{ message }}
+                    </div> 
+                {% endfor %}
+            {% endif%}
+
+        {% endwith%}
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
+
+-->
+
+
+<!-- -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>HTML5 Website with Bootstrap | Responsive Website Design</title>
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<!-- Bootstrap 4.5 CSS 
+	<link rel="stylesheet" href="static/bootstrap.min.css"> -->
+	<!-- Style CSS -->
+	<link rel="stylesheet" href="static/style.css">
+	<!-- Google Fonts 
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700&display=swap" rel="stylesheet"> -->
+</head>
+<body>
+
+<!-- FIRST PAGE -->
+
+	<!-- Top Bar -->
+	<div class="top-bar">
+		<div class="container">
+			<div class="col-12 text-right">
+				<p><a href="">Project Title</a></p>
+			</div>
+		</div>
+	</div>
+	<!-- End Top Bar -->
+
+
+	<!-- Navigation -->
+	<nav class="navbar bg-light navbar-light navbar-expand-lg">
+		<div class="container">
+
+			<a href="index.html" class="navbar-brand"><span>Jandali Inc. </span></a>
+
+			<button class="navbar-toggler" type="button" data-toggle="collapse" 
+				data-target="#navbarResponsive">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a href="index.html" class="nav-link active">Home</a></li>
+					<li class="nav-item"><a href="" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="" class="nav-link">Plants</a></li>
+					<li class="nav-item"><a href="" class="nav-link">Pots</a></li>
+					<li class="nav-item"><a href="" class="nav-link">Contact Us</a></li>
+				</ul>
+
+			</div>
+
+		</div>
+    </nav>
+
+    <div>
         <!-- Add base html here. -->
         <!-- Below is for flashing messages-->
         {% with messages = get_flashed_messages(with_categories=true) %}
@@ -21,5 +100,6 @@
         {% endwith%}
         {% block content %}
         {% endblock %}
-    </body>
-</html>
+    </div>
+
+</body>
