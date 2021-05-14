@@ -27,15 +27,12 @@ Past Plant's Used - Display's all previous plants used for experimentation
 Plant Details - Display's the details of a particular plant 
 '''
 
-@app.route("/")
-def general():
-    return render_template('home.html', methods=['GET', 'POST'])
 
 @app.route("/home")
 def home():
     return render_template('home.html')
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm()
     if form.validate_on_submit():
