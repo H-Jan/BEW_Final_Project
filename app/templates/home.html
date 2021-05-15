@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html>
+{% extends "base.html" %}
+{% block content %} 
 
-    {% extends "base.html" %}
-    {% block content %} 
-    <head>
-        <title>Experiment Tracker</title>
-        <link rel="stylesheet" href="/static/style.css">
-    </head>
-    <body>
-        {% for info in geninfo %}
-            <h1> {{ info.professor }} </h1>
-            <p> {{ info.Experiment_Title }} </p>
-        {% endfor %}
-    </body>
-
-    {% endblock content %} 
-</html>
+<h1> Welcome back! </h1>
